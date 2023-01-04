@@ -5,7 +5,11 @@ import (
 	"restapi.com/akademik/api/models"
 )
 
-var mahasiswa models.MahasiswaModel
+
+var mahasiswa models.MahasiswaModel //instalasi model mahasiswa
+
+
+// function mendapatkan data mahasiswa
 var GetDataMahasiswa=func(c *gin.Context){
 
 	data,db:=models.GetDataMahasiswa()
@@ -19,6 +23,8 @@ var GetDataMahasiswa=func(c *gin.Context){
 	}
 	c.JSON(200,gin.H{"message":"Data not Empty ","status":1,"data":data})
 }
+
+// function menyimpan data mahasiswa
 
 var SaveDataMahasiswa=func(c *gin.Context){
 	
@@ -39,7 +45,7 @@ var SaveDataMahasiswa=func(c *gin.Context){
 
 	c.JSON(200,gin.H{"message":"Save Data Success","status":1})
 }
-
+// function memperbarui data mahasiswa
 var UpdateDataMahasiswa=func(c *gin.Context){
 	errjson:=c.ShouldBindJSON(&mahasiswa)
 	if errjson !=nil{
@@ -60,6 +66,7 @@ var UpdateDataMahasiswa=func(c *gin.Context){
 	c.JSON(200,gin.H{"message":"Update Data Success","status":1})
 }
 
+// function menghapus data mahasiswa
 var DeleteDataMahasiswa=func(c *gin.Context){
 	mahasiswa.Nim=c.Param("nim")
 	check:=models.DeleteDataMahasiswa(mahasiswa)
@@ -74,6 +81,8 @@ var DeleteDataMahasiswa=func(c *gin.Context){
 	}
 	c.JSON(200,gin.H{"message":"Delete Data Success","status":1})
 }
+
+// function mencari data mahasiswa
 
 var SearchDataMahasiswa=func(c *gin.Context){
 	mahasiswa.Nim=c.Param("nim")
